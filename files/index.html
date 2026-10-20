@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestão de Atividades</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Minhas atividades</h1>
+    <ul class="stats" aria-label="Resumo">
+      <li><strong id="cTotal">0</strong> total</li>
+      <li><strong id="cPend">0</strong> pendentes</li>
+      <li><strong id="cDone">0</strong> concluídas</li>
+    </ul>
+  </header>
+
+  <main class="layout">
+    <section class="panel" aria-labelledby="formTitle">
+      <h2 id="formTitle">Nova atividade</h2>
+      <form id="form" novalidate>
+        <input type="hidden" id="id">
+        <label for="titulo">Título</label>
+        <input id="titulo" maxlength="80" autocomplete="off">
+        <small class="err" data-for="titulo"></small>
+
+        <label for="disciplina">Disciplina</label>
+        <input id="disciplina" maxlength="60" autocomplete="off">
+        <small class="err" data-for="disciplina"></small>
+
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" rows="3" maxlength="400"></textarea>
+        <small class="err" data-for="descricao"></small>
+
+        <label for="prazo">Prazo</label>
+        <input id="prazo" type="date">
+        <small class="err" data-for="prazo"></small>
+
+        <div class="row">
+          <button class="btn primary" id="submitBtn" type="submit">Adicionar atividade</button>
+          <button class="btn ghost" id="cancelBtn" type="button" hidden>Cancelar edição</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="list-area" aria-labelledby="listTitle">
+      <div class="list-head">
+        <h2 id="listTitle">Atividades</h2>
+        <div class="filters" role="group" aria-label="Filtrar por status">
+          <button class="chip active" data-filter="todas" aria-pressed="true">Todas</button>
+          <button class="chip" data-filter="pendentes" aria-pressed="false">Pendentes</button>
+          <button class="chip" data-filter="concluidas" aria-pressed="false">Concluídas</button>
+        </div>
+      </div>
+      <ul id="list" class="list"></ul>
+      <p id="empty" class="empty" hidden></p>
+    </section>
+  </main>
+
+  <dialog id="confirm" aria-labelledby="confirmTitle">
+    <form method="dialog">
+      <h3 id="confirmTitle">Excluir atividade?</h3>
+      <p id="confirmText"></p>
+      <div class="row end">
+        <button class="btn ghost" value="cancel">Manter</button>
+        <button class="btn danger" value="ok">Excluir</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
